@@ -4,6 +4,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 
+// const userRoutes = require('./routes/user');
+
 const app = express();
 dotenv.config() ;
 app.use(express.json());
@@ -16,11 +18,13 @@ const CONNECTION_URL = process.env.CONNECTION_URL ;
 mongoose.connect ( CONNECTION_URL  , {
   useNewUrlParser : true ,
   useUnifiedTopology : true
-}).then( () => {
+}).then(() => {
   console.log( "Connexion réussi ! Vous êtes à présent en relation avec la base de données" ) ;
-}).catch( ( err ) => console.log ( err.message ) ) ;
+}).catch(() => console.log ( "Connexion à MongoDB échoué" ) ) ;
 
 app.use(cors());
+
+ // app.use("/user", userRoutes);
 
 app.listen ( PORT , ( req , res ) => {
     console.log ( "Le server est sur le port " , PORT ) ;
