@@ -46,7 +46,7 @@ const Show = styled.button`
   background-color: ${colors.secondary};
   height: 25px;
   width: 65px;
-  margin: -43px 0 0 193px;
+  margin: -43px 0 20px 193px;
   border-radius: 10px;
 `
 
@@ -80,18 +80,23 @@ function Form() {
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
   
   const [pseudo, setPseudo] = useState('');
+  const [sexe, setSexe] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [verifyPassword, setVerifyPassword]= useState('');
+
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
    
-  axios.post('http://localhost:5000/api/auth/signUp', {
+  axios.post('http://localhost:5000/api/auth/signIn', {
 
     pseudo,
+    sexe,
     email,
     password,
+    verifyPassword,
   })
   .then((res) => {
     if (res.status === 400) {
@@ -114,12 +119,19 @@ function Form() {
         <Formulaire onSubmit={formSubmitHandler}>
         <BlocForm>
           <FormTitle>Inscivez vous dès maintenant !</FormTitle>
-            <FormValue htmlFor="Pseuso">- Pseudo -</FormValue>
+            <FormValue htmlFor="Pseudo">- Pseudo -</FormValue>
             <FormInput type="text" placeholder="Votre pseudo" onChange={(event) => setPseudo(event.target.value)} minLength={2} maxLength={16} required/>
+            <FormValue htmlFor='sexe'>- Sexe -</FormValue>
+            <FormInput type="text" placeholder='Homme ou Femme' onChange={(event) => setSexe(event.target.value)} required/>
             <FormValue htmlFor="email">- Email -</FormValue>
             <FormInput type="text" placeholder="Email" onChange={(event) => setEmail(event.target.value)}  required/>
             <FormValue htmlFor="password">- Mot de Passe -</FormValue>
             <FormInput type={passwordIsVisible ? 'text' : 'password'} placeholder="Mot de Passe" onChange={(event) => setPassword(event.target.value)} required/>
+            <Show type="button" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
+            {passwordIsVisible ? 'Cacher' : 'Montrer'}
+            </Show>
+            <FormValue htmlFor="password">- Vérifier votre mot de Passe -</FormValue>
+            <FormInput type={passwordIsVisible ? 'text' : 'password'} placeholder="Vérifier mot de Passe" onChange={(event) => setVerifyPassword(event.target.value)} required/>
             <Show type="button" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
             {passwordIsVisible ? 'Cacher' : 'Montrer'}
             </Show>

@@ -24,7 +24,7 @@ mongoose.connect ( CONNECTION_URL  , {
 
 app.use(cors());
 
- // app.use("/user", userRoutes);
+// app.use('/api/auth', userRoutes); 
 
 app.listen ( PORT , ( req , res ) => {
     console.log ( "Le server est sur le port " , PORT ) ;
