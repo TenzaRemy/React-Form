@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 
-// const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user');
 
 const app = express();
 dotenv.config() ;
@@ -24,7 +24,7 @@ mongoose.connect ( CONNECTION_URL  , {
 
 app.use(cors());
 
-// app.use('/api/auth', userRoutes); 
+app.use('/api/auth', userRoutes); 
 
 app.listen ( PORT , ( req , res ) => {
     console.log ( "Le server est sur le port " , PORT ) ;

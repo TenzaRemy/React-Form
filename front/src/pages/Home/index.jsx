@@ -86,7 +86,7 @@ function Login() {
     event.preventDefault();
 
    
-  axios.post('http://localhost:5000/api/auth/login', {
+  axios.post('http://localhost:5000/api/auth/signUp', {
 
     email,
     password,
@@ -95,7 +95,7 @@ function Login() {
     if (res.status === 401){
       console.log(res);
     } else {
-      window.location="/Blog";
+      window.location="/Accueil";
       localStorage.setItem('userdata', JSON.stringify(res.data))
         localStorage.setItem('token', (res.data.token))
         localStorage.setItem('userId', (res.data.userId))
