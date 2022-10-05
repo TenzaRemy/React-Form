@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import colors from '../../utils/style/colors'
 
 const StyledGlobalStyle = createGlobalStyle`
     * {
@@ -8,7 +9,7 @@ const StyledGlobalStyle = createGlobalStyle`
     }
     body {
         margin: 0;
-        background-color: #e0e0e0;
+        background-color: ${colors.primary};
     }
 `
 
