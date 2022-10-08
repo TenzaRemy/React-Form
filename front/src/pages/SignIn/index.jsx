@@ -37,6 +37,9 @@ const FormInput =  styled.input`
   width: 250px;
   border-radius: 5px;
   background-color: ${colors.primary};
+    :focus{
+      background-color: #1A2C38;
+    }
 `
 
 const Show = styled.button`
@@ -45,6 +48,11 @@ const Show = styled.button`
   width: 65px;
   margin: -49px 0 20px 200px;
   border-radius: 5px;
+  cursor: pointer;
+    :hover{
+      color: cyan;
+      border-color: cyan;
+    }
 `
 
 const FormValue = styled.label`
@@ -62,9 +70,16 @@ const Log = styled.button`
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
+    :hover{
+      color: green;
+      border-color: darkgreen;
+    }
 `
 const Sign = styled.span`
   color: ${colors.tertiary};
+    :hover{
+      color: cyan;
+    }
 `
 
 function Form() {
@@ -72,6 +87,7 @@ function Form() {
   
   const [pseudo, setPseudo] = useState('');
   const [birthDate, setBirthDate] = useState('');
+  const [sexe, setSexe] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -84,6 +100,7 @@ function Form() {
 
     pseudo,
     birthDate,
+    sexe,
     email,
     password,
   })
@@ -109,13 +126,20 @@ function Form() {
           <FormTitle>Bienvenu !</FormTitle>
           <ImgLogo src={logo} alt="logo" />
             <FormValue htmlFor="Pseudo">Pseudo</FormValue>
-            <FormInput type="text" placeholder="Votre pseudo" onChange={(event) => setPseudo(event.target.value)} minLength={2} maxLength={16} required/>
+              <FormInput type="text" placeholder="Votre pseudo" onChange={(event) => setPseudo(event.target.value)} minLength={2} maxLength={16} required/>
             <FormValue htmlFor='date'>Date de naissance</FormValue>
-            <FormInput type="date" onChange={(event) => setBirthDate(event.target.value)} required/>
+              <FormInput type="date" onChange={(event) => setBirthDate(event.target.value)} required/>
+            <FormValue htmlFor='sexe'>Votre Sexe</FormValue>
+            <select onChange={(event) => setSexe(event.target.value)} required>       
+              <option value="">Homme</option>
+              <option value="Homme">Homme</option>
+              <option value="Femme">Femme</option>
+              <option value="Autre">Autre</option>
+            </select>
             <FormValue htmlFor="email">Email</FormValue>
-            <FormInput type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}  required/>
+              <FormInput type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}  required/>
             <FormValue htmlFor="password">Mot de Passe</FormValue>
-            <FormInput type={passwordIsVisible ? 'text' : 'password'} placeholder="Mot de Passe" onChange={(event) => setPassword(event.target.value)} required/>
+              <FormInput type={passwordIsVisible ? 'text' : 'password'} placeholder="Mot de Passe" onChange={(event) => setPassword(event.target.value)} required/>
             <Show type="button" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
             {passwordIsVisible ? 'Cacher' : 'Montrer'}
             </Show>

@@ -34,6 +34,9 @@ const FormInput =  styled.input`
   width: 250px;
   border-radius: 5px;
   background-color: ${colors.primary};
+    :focus{
+      background-color: #1A2C38;
+    }
 `
 
 const Show = styled.button`
@@ -42,6 +45,11 @@ const Show = styled.button`
   width: 65px;
   margin: -49px 0 0 200px;
   border-radius: 5px;
+  cursor: pointer;
+    :hover{
+      color: cyan;
+      border-color: cyan;
+    }
 `
 
 const FormValue = styled.label`
@@ -59,10 +67,17 @@ const Log = styled.button`
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
+    :hover{
+      color: green;
+      border-color: darkgreen;
+    }
 `
 
 const Sign = styled.span`
   color: ${colors.tertiary};
+  :hover{
+    color: cyan;
+  }
 `
 
 function Login() {

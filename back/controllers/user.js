@@ -14,6 +14,7 @@ exports.signin = (req, res, next) => {
             pseudo: req.body.pseudo,
             email: req.body.email,
             birthDate: req.body.birthDate,
+            sexe: req.body.sexe,
             password: hash,
             isAdmin: false,
         });
