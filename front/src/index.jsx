@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Error from './components/Error';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
+import Accueil from './pages/Accueil';
 import GlobalStyle from './utils/style/GlobalStyle';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"; // React router v6 app
 
@@ -13,6 +14,7 @@ root.render(
       <GlobalStyle />
       <Routes>
         <Route path="*" element={<Error/>}/>
+        <Route path="/Accueil" element={<Accueil/>}/>
         <Route exact path="/" element={<Home/>}/>
         <Route path="/SignIn" element={<SignIn/>}/>
       </Routes>

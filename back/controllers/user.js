@@ -13,7 +13,7 @@ exports.signin = (req, res, next) => {
         const user = new User({
             pseudo: req.body.pseudo,
             email: req.body.email,
-            sexe: req.body.sexe,
+            birthDate: req.body.birthDate,
             password: hash,
             isAdmin: false,
         });

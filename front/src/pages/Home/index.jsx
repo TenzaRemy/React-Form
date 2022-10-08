@@ -33,11 +33,11 @@ const FormInput =  styled.input`
   margin: 10px 0 15px 0;
   width: 250px;
   border-radius: 5px;
-  background-color: ${colors.secondary};
+  background-color: ${colors.primary};
 `
 
 const Show = styled.button`
-  background-color: ${colors.secondary};
+  background-color: ${colors.primary};
   height: 30px;
   width: 65px;
   margin: -49px 0 0 200px;

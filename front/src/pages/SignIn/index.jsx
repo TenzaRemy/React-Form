@@ -36,11 +36,11 @@ const FormInput =  styled.input`
   margin: 10px 0 15px 0;
   width: 250px;
   border-radius: 5px;
-  background-color: ${colors.secondary};
+  background-color: ${colors.primary};
 `
 
 const Show = styled.button`
-  background-color: ${colors.secondary};
+  background-color: ${colors.primary};
   height: 30px;
   width: 65px;
   margin: -49px 0 20px 200px;
@@ -71,7 +71,7 @@ function Form() {
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
   
   const [pseudo, setPseudo] = useState('');
-  const [sexe, setSexe] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -83,7 +83,7 @@ function Form() {
   axios.post('http://localhost:5000/api/auth/signIn', {
 
     pseudo,
-    sexe,
+    birthDate,
     email,
     password,
   })
@@ -106,14 +106,14 @@ function Form() {
       <div>
         <Formulaire onSubmit={formSubmitHandler}>
         <BlocForm>
-          <FormTitle>Bienvenu</FormTitle>
+          <FormTitle>Bienvenu !</FormTitle>
           <ImgLogo src={logo} alt="logo" />
             <FormValue htmlFor="Pseudo">Pseudo</FormValue>
             <FormInput type="text" placeholder="Votre pseudo" onChange={(event) => setPseudo(event.target.value)} minLength={2} maxLength={16} required/>
-            <FormValue htmlFor='sexe'>Sexe</FormValue>
-            <FormInput type="text" placeholder='Homme ou Femme' onChange={(event) => setSexe(event.target.value)} required/>
+            <FormValue htmlFor='date'>Date de naissance</FormValue>
+            <FormInput type="date" onChange={(event) => setBirthDate(event.target.value)} required/>
             <FormValue htmlFor="email">Email</FormValue>
-            <FormInput type="text" placeholder="Email" onChange={(event) => setEmail(event.target.value)}  required/>
+            <FormInput type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}  required/>
             <FormValue htmlFor="password">Mot de Passe</FormValue>
             <FormInput type={passwordIsVisible ? 'text' : 'password'} placeholder="Mot de Passe" onChange={(event) => setPassword(event.target.value)} required/>
             <Show type="button" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>

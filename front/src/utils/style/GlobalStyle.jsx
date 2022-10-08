@@ -6,6 +6,7 @@ const StyledGlobalStyle = createGlobalStyle`
         font-family: 'Lato', sans-serif;
         list-style-type: none;
         text-decoration: none;
+        color: ${colors.secondary};
     }
     body {
         margin: 0;
