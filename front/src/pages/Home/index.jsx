@@ -86,6 +86,8 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const error = document.getElementById("error");
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -109,7 +111,8 @@ function Login() {
   })
   .catch ((err) => {
     alert('Les données saisies ne correspondent à aucun compte. Veuillez vérifier votre Adresse mail et/ou votre mot de passe.');
-      console.log(err);
+     error.style.backgroundColor = "red";
+    console.log(err);
   })
   }
     return (
@@ -126,7 +129,7 @@ function Login() {
               {passwordIsVisible ? 'Cacher' : 'Montrer'}
             </Show>
             <p>Pas de compte ? <Link to="/SignIn"><Sign>Inscrivez-vous ici</Sign></Link></p>
-            <Log type="submit">Se connecter</Log>
+            <Log id="error" type="submit">Se connecter</Log>
         </BlocForm>
         </Formulaire>
       </div>
