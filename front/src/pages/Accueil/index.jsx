@@ -26,19 +26,27 @@ const List = styled.li`
 
 
 function Blog() {
+
+    function logOut() {
+        window.location = '/';
+        localStorage.clear(); 
+    }
+
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.token) {
       navigate("/Unauthorized");
+    } else {
+        
     }
   }, [navigate]);
 
     return (
       <div>
         <NavLink>
-            <BlocLink>
-          
-            <Link to="/Logout"><List><BiLogOut /></List></Link>
+            <BlocLink>       
+            <Link onClick={() => logOut()} ><List><BiLogOut /></List></Link>
+            <h1>Page d'Accueil</h1>
             </BlocLink>
         </NavLink>
         </div>
