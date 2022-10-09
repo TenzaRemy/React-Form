@@ -31,11 +31,14 @@ const ImgLogo = styled.img`
 const FormInput =  styled.input`
   padding: 10px;
   margin: 10px 0 15px 0;
-  width: 250px;
+  width: 300px;
   border-radius: 5px;
   background-color: ${colors.primary};
     :focus{
       background-color: #1A2C38;
+    }
+    :hover{
+      border-color: ${colors.tertiary};
     }
 `
 
@@ -43,7 +46,7 @@ const Show = styled.button`
   background-color: ${colors.primary};
   height: 30px;
   width: 65px;
-  margin: -49px 0 0 200px;
+  margin: -49px 0 0 250px;
   border-radius: 5px;
   cursor: pointer;
     :hover{
@@ -68,8 +71,8 @@ const Log = styled.button`
   font-weight: 600;
   cursor: pointer;
     :hover{
-      color: green;
-      border-color: darkgreen;
+      color: #37FF8B;
+      border-color: #37FF8B;
     }
 `
 
@@ -87,6 +90,8 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const error = document.getElementById("error");
+  const errorSubmit = document.createElement("p");
+  let blocErr = document.getElementById("msgErr");
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -110,8 +115,11 @@ function Login() {
     }
   })
   .catch ((err) => {
-    alert('Les données saisies ne correspondent à aucun compte. Veuillez vérifier votre Adresse mail et/ou votre mot de passe.');
-     error.style.backgroundColor = "red";
+     error.style.color = "red";
+     error.style.borderColor = "red";
+     blocErr.appendChild(errorSubmit);
+     errorSubmit.innerHTML += `Veuillez vérifier vos données saisies`;
+     errorSubmit.style.color = "red";
     console.log(err);
   })
   }
@@ -121,6 +129,7 @@ function Login() {
         <BlocForm>
           <FormTitle>Vous semblez familier</FormTitle>
           <ImgLogo src={logo} alt="logo" />
+          <div id="msgErr"></div>
             <FormValue htmlFor="email">Email</FormValue>
             <FormInput type="text" placeholder="Email"  onChange={(event) => setEmail(event.target.value)} required/>
             <FormValue htmlFor="password">Mot de Passe</FormValue>

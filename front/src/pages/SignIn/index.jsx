@@ -34,11 +34,28 @@ const ImgLogo = styled.img`
 const FormInput =  styled.input`
   padding: 10px;
   margin: 10px 0 15px 0;
-  width: 250px;
+  width: 300px;
   border-radius: 5px;
   background-color: ${colors.primary};
     :focus{
       background-color: #1A2C38;
+    }
+    :hover{
+      border-color: ${colors.tertiary};
+    }
+`
+
+const FormInputDob =  styled.input`
+  padding: 10px;
+  margin: 10px 15px 15px 10px;
+  border-radius: 5px;
+  width: 30%;
+  background-color: ${colors.primary};
+    :focus{
+      background-color: #1A2C38;
+    }
+    :hover{
+      border-color: ${colors.tertiary};
     }
 `
 
@@ -46,7 +63,7 @@ const Show = styled.button`
   background-color: ${colors.primary};
   height: 30px;
   width: 65px;
-  margin: -49px 0 20px 200px;
+  margin: -49px 0 20px 250px;
   border-radius: 5px;
   cursor: pointer;
     :hover{
@@ -57,6 +74,23 @@ const Show = styled.button`
 
 const FormValue = styled.label`
   font-weight: 600;
+`
+const FormSelect = styled.select`
+    background-color: ${colors.primary};
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 30%;
+    :focus{
+      background-color: #1A2C38;
+    }
+    :hover{
+      border-color: ${colors.tertiary};
+    }
+`
+
+const FormGroup = styled.div`
+    
 `
 
 const Log = styled.button`
@@ -71,8 +105,8 @@ const Log = styled.button`
   font-weight: 600;
   cursor: pointer;
     :hover{
-      color: green;
-      border-color: darkgreen;
+      color: #37FF8B;
+      border-color: #37FF8B;
     }
 `
 const Sign = styled.span`
@@ -91,6 +125,9 @@ function Form() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const error = document.getElementById("error");
+  const errEmail = document.getElementById("email");
+
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -107,6 +144,7 @@ function Form() {
   .then((res) => {
     if (res.status === 400) {
     console.log(res);
+    errEmail.style.color = "red"
     } else {
       window.location = "/";
         localStorage.setItem('userdata', JSON.stringify(res.data))
@@ -115,7 +153,8 @@ function Form() {
   })
   .catch((err) => {
     console.log(err);
-    alert('Vérifier vos données saisies.');
+    error.style.color = "red";
+     error.style.borderColor = "red";
   });
 }
 
@@ -127,17 +166,19 @@ function Form() {
           <ImgLogo src={logo} alt="logo" />
             <FormValue htmlFor="Pseudo">Pseudo</FormValue>
               <FormInput type="text" placeholder="Votre pseudo" onChange={(event) => setPseudo(event.target.value)} minLength={2} maxLength={16} required/>
-            <FormValue htmlFor='date'>Date de naissance</FormValue>
-              <FormInput type="date" onChange={(event) => setBirthDate(event.target.value)} required/>
-            <FormValue htmlFor='sexe'>Votre Sexe</FormValue>
-            <select onChange={(event) => setSexe(event.target.value)} required>       
-              <option value="">Homme</option>
+              <FormGroup>
+            <FormValue htmlFor='date'>Age</FormValue>
+              <FormInputDob type="date" onChange={(event) => setBirthDate(event.target.value)} required/>
+            <FormValue htmlFor='sexe'>Sexe</FormValue>
+            <FormSelect onChange={(event) => setSexe(event.target.value)} required>       
+              <option value=""></option>
               <option value="Homme">Homme</option>
               <option value="Femme">Femme</option>
               <option value="Autre">Autre</option>
-            </select>
+            </FormSelect>
+              </FormGroup>
             <FormValue htmlFor="email">Email</FormValue>
-              <FormInput type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}  required/>
+              <FormInput id="email"type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}  required/>
             <FormValue htmlFor="password">Mot de Passe</FormValue>
               <FormInput type={passwordIsVisible ? 'text' : 'password'} placeholder="Mot de Passe" onChange={(event) => setPassword(event.target.value)} required/>
             <Show type="button" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
