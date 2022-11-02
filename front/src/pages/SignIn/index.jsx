@@ -4,6 +4,10 @@ import colors from '../../utils/style/colors';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import logo from '../../assets/favicon.webp';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal)
 
 
 const Formulaire = styled.div`
@@ -49,7 +53,6 @@ const FormInputDob =  styled.input`
   padding: 10px;
   margin: 10px 15px 15px 10px;
   border-radius: 5px;
-  width: 30%;
   background-color: ${colors.primary};
     :focus{
       background-color: #1A2C38;
@@ -80,7 +83,6 @@ const FormSelect = styled.select`
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
-    width: 30%;
     :focus{
       background-color: #1A2C38;
     }
@@ -125,9 +127,6 @@ function Form() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const error = document.getElementById("error");
-  const errEmail = document.getElementById("email");
-
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -144,17 +143,25 @@ function Form() {
   .then((res) => {
     if (res.status === 400) {
     console.log(res);
-    errEmail.style.color = "red"
     } else {
-      window.location = "/";
+      MySwal.fire({
+        title: 'Vous avez réussi !',
+        text: 'Vous êtes bien inscrit ! Veuillez dès à présent vous connecter',
+        icon: 'success',
+        confirmButtonText: 'Fermer'
+      })
         localStorage.setItem('userdata', JSON.stringify(res.data))
         localStorage.setItem('token', (res.data.token))
     }
   })
   .catch((err) => {
     console.log(err);
-    error.style.color = "red";
-     error.style.borderColor = "red";
+    MySwal.fire({
+      title: 'Erreur!',
+      text: 'Vérifiez vos données saisies dans le formulaire',
+      icon: 'error',
+      confirmButtonText: 'Fermer'
+    })
   });
 }
 
@@ -179,8 +186,8 @@ function Form() {
               </FormGroup>
             <FormValue htmlFor="email">Email</FormValue>
               <FormInput id="email"type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}  required/>
-            <FormValue htmlFor="password">Mot de Passe</FormValue>
-              <FormInput type={passwordIsVisible ? 'text' : 'password'} placeholder="Mot de Passe" onChange={(event) => setPassword(event.target.value)} required/>
+            <FormValue  htmlFor="password">Mot de Passe</FormValue>
+              <FormInput id="mdp" type={passwordIsVisible ? 'text' : 'password'} placeholder="Mot de Passe" onChange={(event) => setPassword(event.target.value)} required/>
             <Show type="button" onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
             {passwordIsVisible ? 'Cacher' : 'Montrer'}
             </Show>
