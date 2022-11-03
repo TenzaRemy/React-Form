@@ -4,6 +4,10 @@ import colors from '../../utils/style/colors';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import logo from '../../assets/favicon.webp';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal)
 
 const Formulaire = styled.div`
   width: 100%;
@@ -89,10 +93,6 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const error = document.getElementById("error");
-  const errorSubmit = document.createElement("p");
-  let blocErr = document.getElementById("msgErr");
-
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -114,14 +114,15 @@ function Login() {
         console.log(res.data)
     }
   })
-  .catch ((err) => {
-     error.style.color = "red";
-     error.style.borderColor = "red";
-     blocErr.appendChild(errorSubmit);
-     errorSubmit.innerHTML += `Veuillez vérifier vos données saisies`;
-     errorSubmit.style.color = "red";
+  .catch((err) => {
     console.log(err);
-  })
+    MySwal.fire({
+      title: 'Erreur!',
+      text: 'Vérifiez vos données saisies dans le formulaire',
+      icon: 'error',
+      confirmButtonText: 'Fermer',
+    })
+  });
   }
     return (
       <div>

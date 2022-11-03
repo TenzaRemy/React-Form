@@ -127,7 +127,6 @@ function Form() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -148,10 +147,11 @@ function Form() {
         title: 'Vous avez réussi !',
         text: 'Vous êtes bien inscrit ! Veuillez dès à présent vous connecter',
         icon: 'success',
-        confirmButtonText: 'Fermer'
-      })
+      }).then(function() {
+        window.location = "/";
         localStorage.setItem('userdata', JSON.stringify(res.data))
         localStorage.setItem('token', (res.data.token))
+    });
     }
   })
   .catch((err) => {
